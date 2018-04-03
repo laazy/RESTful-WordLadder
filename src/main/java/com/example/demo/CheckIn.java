@@ -5,13 +5,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
+
+import java.util.Arrays;
 import java.util.Vector;
 
 @RestController
 public class CheckIn {
-    private Vector<String> ans;
     private boolean flag = false;
-    private WordLadder ladder;
+    private WordLadder ladder = new WordLadder();
+
+    @RequestMapping("/test")
+    public String[] test(){
+        String[] ret = new String[2];
+        ret[0] = "test1";
+        ret[1] = "test2";
+        return ret;
+    }
 
     @RequestMapping("/")
     public Vector<String> getLadder (@RequestParam(value = "begin", defaultValue = "") String begin,
@@ -23,7 +32,7 @@ public class CheckIn {
             catch (FileNotFoundException e) {
             }
         }
-        ans = ladder.findLadder(begin,end);
-        return ans;
+        return ladder.findLadder(begin,end);
+        //return ans;
     }
 }
